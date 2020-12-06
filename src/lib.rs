@@ -35,6 +35,9 @@ where
             KeySet::AllExceptSome(e) => !e.contains(&element),
         }
     }
+
+    // TODO: removes(other: KeySet<T>) -> KeySet<T>
+    // TODO: intersect(other: KeySet<T>) -> KeySet<T>
 }
 
 impl<T> std::fmt::Display for KeySet<T>
