@@ -1,9 +1,13 @@
+use crate::intersect::{
+    intersect_from_all, intersect_from_all_except_some, intersect_from_none, intersect_from_some,
+};
 use crate::remove::{
     remove_from_all, remove_from_all_except_some, remove_from_none, remove_from_some,
 };
 use crate::utils::clean_vec;
 use std::fmt::Debug;
 
+mod intersect;
 mod remove;
 mod utils;
 
@@ -59,7 +63,14 @@ where
         }
     }
 
-    // TODO: intersect(other: KeySet<T>) -> KeySet<T>
+    pub fn intersect(&self, other: &KeySet<T>) -> KeySet<T> {
+        match self {
+            KeySet::All => intersect_from_all(other),
+            KeySet::None => intersect_from_none(other),
+            KeySet::Some(e) => intersect_from_some(e, other),
+            KeySet::AllExceptSome(e) => intersect_from_all_except_some(e, other),
+        }
+    }
 }
 
 impl<T> std::fmt::Display for KeySet<T>
