@@ -14,6 +14,20 @@ where
     AllExceptSome(Vec<T>),
 }
 
+impl<T> std::fmt::Display for KeySet<T>
+where
+    T: Ord + Debug,
+{
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            KeySet::All => write!(f, "KeySet::All"),
+            KeySet::None => write!(f, "KeySet::None"),
+            KeySet::Some(e) => write!(f, "KeySet::Some({:?})", e),
+            KeySet::AllExceptSome(e) => write!(f, "KeySet::AllExceptSome({:?})", e),
+        }
+    }
+}
+
 pub fn key_set_some<T>(elements: &Vec<T>) -> KeySet<T>
 where
     T: Ord + Debug + Clone,
@@ -61,6 +75,25 @@ mod tests {
         check_type(KeySet::AllExceptSome(vec![1, 2, 3]));
         check_type(KeySet::AllExceptSome(vec!['a', 'b', 'c']));
         check_type(KeySet::AllExceptSome(vec!["a", "b", "c"]));
+    }
+
+    #[test]
+    fn test_display() {
+        let ks_none: KeySet<i32> = KeySet::None;
+        let ks_all: KeySet<i32> = KeySet::All;
+        let ks_some: KeySet<i32> = KeySet::Some(vec![1, 2, 3]);
+        let ks_aes: KeySet<i32> = KeySet::AllExceptSome(vec![1, 2, 3]);
+
+        assert_eq!(format!("Display: {}", ks_none), "Display: KeySet::None");
+        assert_eq!(format!("Display: {}", ks_all), "Display: KeySet::All");
+        assert_eq!(
+            format!("Display: {}", ks_some),
+            "Display: KeySet::Some([1, 2, 3])"
+        );
+        assert_eq!(
+            format!("Display: {}", ks_aes),
+            "Display: KeySet::AllExceptSome([1, 2, 3])"
+        );
     }
 
     #[test]
