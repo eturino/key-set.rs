@@ -5,13 +5,14 @@ use crate::remove::{
     remove_from_all, remove_from_all_except_some, remove_from_none, remove_from_some,
 };
 use crate::utils::clean_vec;
+use serde::{Deserialize, Serialize};
 use std::fmt::Debug;
 
 mod intersect;
 mod remove;
 mod utils;
 
-#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Hash)]
+#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub enum KeySet<T>
 where
     T: Ord + Debug + Clone + Copy,
