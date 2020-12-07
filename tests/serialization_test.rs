@@ -33,7 +33,7 @@ fn test_none_deserialize() {
 #[test]
 fn test_some_serialize() {
     let expected = "{\"Some\":[1,2,3]}".to_string();
-    let ks: KeySet<i32> = KeySet::with_some(&vec![1, 2, 3]);
+    let ks: KeySet<i32> = KeySet::for_some(&vec![1, 2, 3]);
     let j = serde_json::to_string(&ks).unwrap();
     assert_eq!(j, expected);
 }
@@ -48,7 +48,7 @@ fn test_some_deserialize() {
 #[test]
 fn test_all_except_some_serialize() {
     let expected = "{\"AllExceptSome\":[1,2,3]}".to_string();
-    let ks: KeySet<i32> = KeySet::with_all_except_some(&vec![1, 2, 3]);
+    let ks: KeySet<i32> = KeySet::for_all_except_some(&vec![1, 2, 3]);
     let j = serde_json::to_string(&ks).unwrap();
     assert_eq!(j, expected);
 }

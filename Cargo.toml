@@ -3,6 +3,10 @@ name = "key_set"
 version = "0.1.0"
 authors = ["Eduardo Turiño <eturino@eturino.com>"]
 edition = "2018"
+license-file = "LICENSE"
+repository = "https://github.com/eturino/key-set.rs/"
+readme = "README.md"
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

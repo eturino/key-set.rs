@@ -22,14 +22,14 @@ We can have a KeySet of `T` where `T: Ord + Debug + Clone + Copy`
 KeySet implements `cmp::Ord`, `cmp::PartialOrd`, `cmp::Eq`, `cmp::PartialEq`, `std::fmt::Debug`, and `std::fmt::Display`
 
 
-### Creation: `KeySet::with_some(&list)`, `KeySet::with_all_except_some(&list)`
+### Creation: `KeySet::for_some(&list)`, `KeySet::for_all_except_some(&list)`
 
 Build your KeySets using the factory functions, giving
 
-- To get a KeySet that represents the given list: `KeySet::with_some(&list)`
+- To get a KeySet that represents the given list: `KeySet::for_some(&list)`
     - if the list is empty, we'll get `None`
     - otherwise, we'll get `Some`
-- To get a KeySet that represents the complementary set of the given list: `KeySet::with_all_except_some(&list)`
+- To get a KeySet that represents the complementary set of the given list: `KeySet::for_all_except_some(&list)`
     - if the list is empty, we'll get `All`
     - otherwise, we'll get `AllExceptSome`
 
@@ -37,10 +37,10 @@ Build your KeySets using the factory functions, giving
 fn example() {
     let empty_vector: Vec<i32> = vec![];
 
-    let ks1 = KeySet::with_some(&empty_vector); // => KeySet::None
-    let ks2 = KeySet::with_some(&vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
-    let ks3 = KeySet::with_all_except_some(empty_vector); // => KeySet::All
-    let ks4 = KeySet::with_all_except_some(&vec![1, 2, 3]); // => KeySet::AllExceptSome([1, 2, 3])
+    let ks1 = KeySet::for_some(&empty_vector); // => KeySet::None
+    let ks2 = KeySet::for_some(&vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
+    let ks3 = KeySet::for_all_except_some(empty_vector); // => KeySet::All
+    let ks4 = KeySet::for_all_except_some(&vec![1, 2, 3]); // => KeySet::AllExceptSome([1, 2, 3])
 }
 ```
 
@@ -50,7 +50,7 @@ Returns a boolean defining if the KeySet includes the given element.
 
 ```rust
 fn example() {
-    let ks1 = KeySet::with_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
+    let ks1 = KeySet::for_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
     ks1.contains(&1); // => true
     ks1.contains(&7); // => false
 
@@ -62,7 +62,7 @@ fn example() {
     ks3.contains(&1); // => false
     ks3.contains(&7); // => false
     
-    let ks4 = KeySet::with_all_except_some(vec![1, 2, 3]); // => KeySet::AllExceptSome([1, 2, 3])
+    let ks4 = KeySet::for_all_except_some(vec![1, 2, 3]); // => KeySet::AllExceptSome([1, 2, 3])
     ks4.contains(&1); // => false
     ks4.contains(&7); // => true
 }
@@ -77,7 +77,7 @@ All KeySet has an `invert()` method that returns an instance of the opposite cla
 
 ```rust
 fn example() {
-    let key_set = KeySet::with_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
+    let key_set = KeySet::for_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
     let comp = key_set.clone(); // => KeySet::AllExceptSome([1, 2, 3])
 }
 ```
@@ -88,8 +88,8 @@ Returns a new KeySet with the difference between ThisSet - OtherSet `(A - B)`
 
 ```rust
 fn example() {
-    let key_set = KeySet::with_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
-    let other = KeySet::with_some(vec![1, 3, 4]); // => KeySet::Some([1, 2, 3])
+    let key_set = KeySet::for_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
+    let other = KeySet::for_some(vec![1, 3, 4]); // => KeySet::Some([1, 2, 3])
     let comp = key_set.remove(&other); // => KeySet::Some([2])
 }
 ```
@@ -101,8 +101,8 @@ Returns a new KeySet with the intersection of both Sets `(A ∩ B)`, representin
 
 ```rust
 fn example() {
-    let key_set = KeySet::with_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
-    let other = KeySet::with_some(vec![1, 3, 4]); // => KeySet::Some([1, 2, 3])
+    let key_set = KeySet::for_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
+    let other = KeySet::for_some(vec![1, 3, 4]); // => KeySet::Some([1, 2, 3])
     let comp = key_set.intersect(&other); // => KeySet::Some([1, 3])
 }
 ```
@@ -116,7 +116,7 @@ If the KeySet is `KeySetSome` or `KeySetAllExceptSome`, they will have a vector 
 
 ```rust
 fn example() {
-    let key_set = KeySet::with_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
+    let key_set = KeySet::for_some(vec![1, 2, 3]); // => KeySet::Some([1, 2, 3])
     let comp = key_set.clone(); // => KeySet::Some([1, 2, 3])
     let equal = key_set == comp; // => true
 }

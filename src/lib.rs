@@ -27,12 +27,12 @@ impl<T> KeySet<T>
 where
     T: Ord + Debug + Clone + Copy,
 {
-    pub fn with_some(elements: &Vec<T>) -> KeySet<T> {
+    pub fn for_some(elements: &Vec<T>) -> KeySet<T> {
         let vec = clean_vec(elements.clone());
         utils::make_some_with(vec)
     }
 
-    pub fn with_all_except_some(elements: &Vec<T>) -> KeySet<T> {
+    pub fn for_all_except_some(elements: &Vec<T>) -> KeySet<T> {
         let vec = clean_vec(elements.clone());
         utils::make_all_except_some_with(vec)
     }
