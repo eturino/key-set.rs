@@ -6,6 +6,7 @@ edition = "2018"
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/eturino/key-set.rs/"
 readme = "README.md"
+description = "KeySet representing concepts of All, None, Some(list), and AllExceptSome(list), with basic set calculations (intersection, difference, inverse)."
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html

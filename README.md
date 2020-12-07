@@ -1,6 +1,6 @@
 # Rust crate `key_set`
 
-KeySet representing concepts of All, None, Some, and AllExceptSome, the last 2 with a sorted uniq list of keys, and all with intersection and diff calculations.
+KeySet representing concepts of All, None, Some(list), and AllExceptSome(list), with basic set calculations (intersection, difference, inverse).
 
 [Github repo here](https://github.com/eturino/key-set.rs)
 
