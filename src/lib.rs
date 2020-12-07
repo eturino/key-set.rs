@@ -11,7 +11,7 @@ mod intersect;
 mod remove;
 mod utils;
 
-#[derive(Debug, Ord, PartialOrd, Eq, PartialEq)]
+#[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Hash)]
 pub enum KeySet<T>
 where
     T: Ord + Debug + Clone + Copy,
@@ -26,12 +26,12 @@ impl<T> KeySet<T>
 where
     T: Ord + Debug + Clone + Copy,
 {
-    pub fn some(elements: &Vec<T>) -> KeySet<T> {
+    pub fn with_some(elements: &Vec<T>) -> KeySet<T> {
         let vec = clean_vec(elements.clone());
         utils::make_some_with(vec)
     }
 
-    pub fn all_except_some(elements: &Vec<T>) -> KeySet<T> {
+    pub fn with_all_except_some(elements: &Vec<T>) -> KeySet<T> {
         let vec = clean_vec(elements.clone());
         utils::make_all_except_some_with(vec)
     }
@@ -98,5 +98,14 @@ where
             KeySet::Some(e) => KeySet::Some(e.clone()),
             KeySet::AllExceptSome(e) => KeySet::AllExceptSome(e.clone()),
         }
+    }
+}
+
+impl<T> Default for KeySet<T>
+where
+    T: Ord + Debug + Clone + Copy,
+{
+    fn default() -> Self {
+        Self::All
     }
 }
