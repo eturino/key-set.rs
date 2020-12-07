@@ -4,21 +4,21 @@ use std::fmt::Debug;
 
 pub fn intersect_from_all<T>(other: &KeySet<T>) -> KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     other.clone()
 }
 
 pub fn intersect_from_none<T>(_other: &KeySet<T>) -> KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     KeySet::None
 }
 
 pub fn intersect_from_some<T>(elements: &Vec<T>, other: &KeySet<T>) -> KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     match other {
         KeySet::All => KeySet::Some(elements.clone()),
@@ -40,7 +40,7 @@ where
 
 pub fn intersect_from_all_except_some<T>(elements: &Vec<T>, other: &KeySet<T>) -> KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     match other {
         KeySet::All => KeySet::AllExceptSome(elements.clone()),
@@ -54,7 +54,7 @@ where
 
         KeySet::AllExceptSome(e) => {
             let mut both_vectors = elements.clone();
-            both_vectors.extend(e);
+            both_vectors.extend(e.clone());
             make_all_except_some_with(clean_vec(both_vectors))
         }
     }

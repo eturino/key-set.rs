@@ -15,7 +15,7 @@ mod utils;
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub enum KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     None,
     Some(Vec<T>),
@@ -25,7 +25,7 @@ where
 
 impl<T> KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     pub fn for_some(elements: &Vec<T>) -> KeySet<T> {
         let vec = clean_vec(elements.clone());
@@ -76,7 +76,7 @@ where
 
 impl<T> std::fmt::Display for KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
@@ -90,7 +90,7 @@ where
 
 impl<T> Clone for KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     fn clone(&self) -> Self {
         match self {
@@ -104,7 +104,7 @@ where
 
 impl<T> Default for KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     fn default() -> Self {
         Self::All

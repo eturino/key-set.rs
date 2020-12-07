@@ -17,7 +17,7 @@ We have an enum with:
 - `KeySet::Some(vec)` represents a concrete set (`A ⊂ 𝕌`)
 - `KeySet::AllExceptSome(vec)` represents the complementary set of a set, all the elements except the given ones (`A' = {x ∈ 𝕌 | x ∉ A}`) _(see [Complement in Wikipedia](https://en.wikipedia.org/wiki/Complement_\(set*theory\)))*
 
-We can have a KeySet of `T` where `T: Ord + Debug + Clone + Copy`
+We can have a KeySet of `T` where `T: Ord + Debug + Clone`
 
 KeySet implements `cmp::Ord`, `cmp::PartialOrd`, `cmp::Eq`, `cmp::PartialEq`, `std::fmt::Debug`, and `std::fmt::Display`
 

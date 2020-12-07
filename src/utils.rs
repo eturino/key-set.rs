@@ -9,7 +9,7 @@ pub fn clean_vec<T: Ord>(mut list: Vec<T>) -> Vec<T> {
 
 pub fn make_some_with<T>(vec: Vec<T>) -> KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     if vec.len() == 0 {
         KeySet::None
@@ -20,7 +20,7 @@ where
 
 pub fn make_all_except_some_with<T>(vec: Vec<T>) -> KeySet<T>
 where
-    T: Ord + Debug + Clone + Copy,
+    T: Ord + Debug + Clone,
 {
     if vec.len() == 0 {
         KeySet::All
